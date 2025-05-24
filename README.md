@@ -15,16 +15,12 @@ Built with **React**, **TypeScript**, **Vite**, and **Tailwind CSS** for fast de
 
 ## Theming
 
-## Theming
-
 | Role             | Color Name      | Hex Code    | RGB Value             | Example Tailwind Equivalent |
 | ---------------- | -------------- | ----------- | --------------------- | -------------------------- |
 | **Primary**      | Deep Navy      | `#333446`   | `rgb(51, 52, 70)`     | `bg-[#333446]`             |
 | **Secondary**    | Slate Blue     | `#7F8CAA`   | `rgb(127, 140, 170)`  | `bg-[#7F8CAA]`             |
 | **Accent**       | Soft Teal      | `#B8CFCE`   | `rgb(184, 207, 206)`  | `bg-[#B8CFCE]`             |
 | **Surface**      | Light Gray     | `#EAEFEF`   | `rgb(234, 239, 239)`  | `bg-[#EAEFEF]`             |
-
-You can use these colors in your Tailwind classes with the `bg-[hex]`, `text-[hex]`, or `border-[hex]` syntax, or add them to your Tailwind config for custom names.
 
 ---
 
