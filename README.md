@@ -2,7 +2,7 @@
 
 A modern, responsive website for E Union Communications PTY LTD, an electrical contractor specializing in electrical and communications solutions.
 
-Built with **React**, **TypeScript**, and **Vite** for fast development and optimal performance.
+Built with **React**, **TypeScript**, **Vite**, and **Tailwind CSS** for fast development and optimal performance.
 
 ## Features
 
@@ -10,6 +10,19 @@ Built with **React**, **TypeScript**, and **Vite** for fast development and opti
 - Contact details and inquiry form
 - Clean, professional design
 - Responsive layout for all devices
+
+---
+
+## Theming
+
+| Role             | Color                             | Hex Code          | Tailwind Equivalent    |
+| ---------------- | --------------------------------- | ----------------- | ---------------------- |
+| **Primary**      | Electric Blue                     | `#00BFFF`         | `sky-400` or custom    |
+| **Accent**       | Bright Yellow                     | `#FFD700`         | `yellow-400` or custom |
+| **Secondary**    | Light Gray                        | `#D1D5DB`         | `gray-300`             |
+| **Surface**      | Very Dark Gray (semi-transparent) | `rgba(0,0,0,0.6)` | `bg-black/60`          |
+| **Text (Light)** | White                             | `#FFFFFF`         | `white`                |
+| **Text (Muted)** | Cool Gray                         | `#9CA3AF`         | `gray-400`             |
 
 ---
 
