@@ -1,28 +1,39 @@
-# React + TypeScript + Vite
+# E Union Communications PTY LTD Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive website for E Union Communications PTY LTD, an electrical contractor specializing in electrical and communications solutions.
 
-Currently, two official plugins are available:
+Built with **React**, **TypeScript**, and **Vite** for fast development and optimal performance.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- Company information and services overview
+- Contact details and inquiry form
+- Clean, professional design
+- Responsive layout for all devices
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
+
+## Development Setup
+
+This project uses a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+### Official Plugins
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) (Babel for Fast Refresh)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) (SWC for Fast Refresh)
+
+### Expanding the ESLint Configuration
+
+If you are developing a production application, update the configuration to enable type-aware lint rules:
 
 ```js
 export default tseslint.config({
   extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
     ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
+    // Or use ...tseslint.configs.strictTypeChecked for stricter rules
     ...tseslint.configs.stylisticTypeChecked,
   ],
   languageOptions: {
-    // other options...
     parserOptions: {
       project: ['./tsconfig.node.json', './tsconfig.app.json'],
       tsconfigRootDir: import.meta.dirname,
@@ -40,13 +51,10 @@ import reactDom from 'eslint-plugin-react-dom'
 
 export default tseslint.config({
   plugins: {
-    // Add the react-x and react-dom plugins
     'react-x': reactX,
     'react-dom': reactDom,
   },
   rules: {
-    // other rules...
-    // Enable its recommended typescript rules
     ...reactX.configs['recommended-typescript'].rules,
     ...reactDom.configs.recommended.rules,
   },
