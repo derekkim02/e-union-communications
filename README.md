@@ -11,19 +11,6 @@ Built with **React**, **TypeScript**, **Vite**, and **Tailwind CSS** for fast de
 - Clean, professional design
 - Responsive layout for all devices
 
----
-
-## Theming
-
-| Role             | Color Name      | Hex Code    | RGB Value             | Example Tailwind Equivalent |
-| ---------------- | -------------- | ----------- | --------------------- | -------------------------- |
-| **Primary**      | Deep Navy      | `#333446`   | `rgb(51, 52, 70)`     | `bg-[#333446]`             |
-| **Secondary**    | Slate Blue     | `#7F8CAA`   | `rgb(127, 140, 170)`  | `bg-[#7F8CAA]`             |
-| **Accent**       | Soft Teal      | `#B8CFCE`   | `rgb(184, 207, 206)`  | `bg-[#B8CFCE]`             |
-| **Surface**      | Light Gray     | `#EAEFEF`   | `rgb(234, 239, 239)`  | `bg-[#EAEFEF]`             |
-
----
-
 ## Development Setup
 
 This project uses a minimal setup to get React working in Vite with HMR and some ESLint rules.
