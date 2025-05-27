@@ -1,8 +1,12 @@
 import React from "react";
-import companyLogo from "@/assets/company-logo-navbar.svg";
+import companyLogo from "@/assets/company-logo.svg";
 import ThemeToggle from "./theme-toggle";
 import { Link } from "react-router-dom";
-import { Users, BookOpenText, BriefcaseBusiness } from "lucide-react";
+import { Users, BookOpenText, BriefcaseBusiness, Menu } from "lucide-react";
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 
 interface MenuItem {
   title: string
@@ -17,11 +21,6 @@ interface Logo {
   src: string
   alt?: string
   title: string
-}
-
-interface NavBarProps {
-  logo?: Logo
-  menu?: MenuItem[]
 }
 
 const logo: Logo = {
@@ -59,34 +58,174 @@ const aboutMenu: MenuItem = {
   ]
 }
 
+const servicesMenu: MenuItem = {
+  title: "Services",
+  url: "/services",
+  items: [
+    {
+      title: "Smart Home Solutions",
+      url: "###",
+      description: "Providing seamless, modern automation systems that enhance comfort, security, and energy efficiency in your home.",
+    },
+    {
+      title: "Home Cinema",
+      url: "###",
+      description: "Home Cinema delivers immersive, high-quality audiovisual experiences that bring the magic of the movies to you.",
+    },
+    {
+      title: "Renovation",
+      url: "###",
+      description: "Transform and modernize your living spaces to enhance comfort, functionality, and style",
+    },
+  ]
+}
 
+const contactMenu: MenuItem = {
+  title: "Contact",
+  url: "/contact",
+}
 
-
-const linkStyle = "font-medium text-white transition-colors transition-transform duration-200 hover:text-[var(--color-accent)] hover:scale-108 active:animate-tilt-shaking"
-
-// w-full flex items-center justify-between px-6 py-4 bg-white shadow-md
-const NavBar: React.FC = () => {
-	return (
-    <nav className="flex items-center justify-between space-x-6 px-6 py-4 bg-[#7F8CAA] w-full top-0">
-      <div className="flex items">
-        <img src={companyLogo} className="h-10 w-auto" />
-      </div>
-
-      <div className="flex space-x-6">
-        <Link to="/" className={linkStyle}>Home</Link>
-        <Link to="/about" className={linkStyle}>About</Link>
-        <Link to="/services" className={linkStyle}>Services</Link>
-        <Link to="/contact" className={linkStyle}>Contact</Link>
-      </div>
-
-      <div className="flex items-center space-x-6">
-        <ThemeToggle />
-        <a href="tel:0123456789">
-          0123 456 789
-        </a>
-      </div>
-    </nav>
+const SubMenuLink = ({ item }: { item: MenuItem }) => {
+  return (
+    <NavigationMenuLink asChild className="w-80">
+      <Link
+        to={item.url}
+        className="flex flex-row gap-4 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-muted hover:text-accent-foreground"
+      >
+        <div className="text-foreground">{item.icon}</div>
+        <div>
+          <div className="text-sm font-semibold">{item.title}</div>
+          {item.description && (
+            <p className="text-sm leading-snug text-muted-foreground">
+              {item.description}
+            </p>
+          )}
+        </div>
+      </Link>
+    </NavigationMenuLink>
   );
 };
+
+const renderMenuItem = (item: MenuItem) => {
+  if (item.items) {
+    return (
+      <NavigationMenuItem key={item.title}>
+        <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
+        <NavigationMenuContent className="bg-popover text-popover-foreground">
+          {item.items.map((subItem) => (
+            <SubMenuLink key={subItem.title} item={subItem} />
+          ))}
+        </NavigationMenuContent>
+      </NavigationMenuItem>
+    );
+  }
+
+  return (
+    <NavigationMenuItem key={item.title}>
+      <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+        <Link
+          to={item.url}
+        >
+          {item.title}
+        </Link>
+      </NavigationMenuLink>
+    </NavigationMenuItem>
+  );
+}
+
+const renderMobileMenuItem = (item: MenuItem) => {
+  if (item.items) {
+    return (
+      <AccordionItem key={item.title} value={item.title} className="border-b-0">
+        <AccordionTrigger className="text-md py-0 font-semibold hover:no-underline">
+          {item.title}
+        </AccordionTrigger>
+        <AccordionContent className="mt-2">
+          {item.items.map((subItem) => (
+            <SubMenuLink key={subItem.title} item={subItem} />
+          ))}
+        </AccordionContent>
+      </AccordionItem>
+    );
+  }
+
+  return (
+    <Link key={item.title} to={item.url} className="text-md font-semibold">
+      {item.title}
+    </Link>
+  )
+}
+
+const NavBar = () => {
+  const menu: MenuItem[] = [
+    homeMenu,
+    aboutMenu,
+    servicesMenu,
+    contactMenu
+  ]
+
+  return (
+    <section className="py-4">
+      <div className="container mx-auto">
+        {/* Desktop Menu */}
+        <nav className="hidden justify-between lg:flex">
+          <div className="flex items-center gap-6">
+            {/* Logo */}
+            <Link to={logo.url} className="flex items-center gap-2">
+              <img src={logo.src} alt={logo.alt} className="max-h-8" />
+              <span className="text-lg font-semibold tracking-tighter">{logo.title}</span>
+            </Link>
+
+            {/* Navigation Menu */}
+            <div className="flex flex-col items-center">
+              <NavigationMenu>
+                <NavigationMenuList>
+                  {menu.map((item) => renderMenuItem(item))}
+                </NavigationMenuList>
+              </NavigationMenu>
+            </div>
+          </div>
+          <ThemeToggle />
+        </nav>
+
+        {/* Mobile Menu */}
+        <div className="block lg:hidden">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <Link to={logo.url} className="flex items-center gap-2">
+              <img src={logo.src} alt={logo.alt} className="max-h-8" />
+              <span className="text-lg font-semibold tracking-tighter">{logo.title}</span>
+            </Link>
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="outline" size="icon">
+                  <Menu className="size-4" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent className="overflow-y-auto">
+                <SheetHeader>
+                  <SheetTitle>
+                    <Link to={logo.url} className="flex items-center gap-2">
+                      <img src={logo.src} alt={logo.alt} className="max-h-8" />
+                      <span className="text-lg font-semibold tracking-tighter">{logo.title}</span>
+                    </Link>
+                  </SheetTitle>
+                </SheetHeader>
+                <div className="flex flex-col gap-6 p-4">
+                  <Accordion type="single" collapsible className="flex w-full flex-col gap-4">
+                    {menu?.map((item) => renderMobileMenuItem(item))}
+                  </Accordion>
+                  <ThemeToggle />
+                </div>
+              </SheetContent>
+            </Sheet>
+          
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+}
 
 export default NavBar;
