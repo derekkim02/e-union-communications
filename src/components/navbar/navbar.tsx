@@ -1,5 +1,6 @@
 import React from "react";
-import companyLogo from "../assets/company-logo-navbar.svg";
+import companyLogo from "@/assets/company-logo-navbar.svg";
+import ThemeToggle from "./theme-toggle";
 import { Link } from "react-router-dom";
 
 const linkStyle = "font-medium text-white transition-colors transition-transform duration-200 hover:text-[var(--color-accent)] hover:scale-108 active:animate-tilt-shaking"
@@ -20,7 +21,8 @@ const NavBar: React.FC = () => {
 		<Link to="/contact" className={linkStyle}>Contact</Link>
       </div>
       {/* Phone Number */}
-      <div className="flex items-center">
+      <div className="flex items-center space-x-6">
+        <ThemeToggle />
         <a href="tel:0123456789">
           0123 456 789
         </a>
