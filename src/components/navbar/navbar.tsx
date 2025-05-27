@@ -85,12 +85,11 @@ const contactMenu: MenuItem = {
   url: "/contact",
 }
 
-const SubMenuLink = ({ item }: { item: MenuItem }) => {
+const SubMenuLink = ({ item, className }: { item: MenuItem, className?: string }) => {
   return (
-    <NavigationMenuLink asChild className="w-80">
       <Link
         to={item.url}
-        className="flex flex-row gap-4 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-muted hover:text-accent-foreground"
+        className={`flex flex-row gap-4 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-muted hover:text-accent-foreground ${className}`}
       >
         <div className="text-foreground">{item.icon}</div>
         <div>
@@ -102,7 +101,6 @@ const SubMenuLink = ({ item }: { item: MenuItem }) => {
           )}
         </div>
       </Link>
-    </NavigationMenuLink>
   );
 };
 
@@ -113,7 +111,9 @@ const renderMenuItem = (item: MenuItem) => {
         <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
         <NavigationMenuContent className="bg-popover text-popover-foreground">
           {item.items.map((subItem) => (
-            <SubMenuLink key={subItem.title} item={subItem} />
+            <NavigationMenuLink asChild key={subItem.title} className="w-80">
+              <SubMenuLink item={subItem} />
+            </NavigationMenuLink>
           ))}
         </NavigationMenuContent>
       </NavigationMenuItem>
@@ -213,7 +213,7 @@ const NavBar = () => {
                 </SheetHeader>
                 <div className="flex flex-col gap-6 p-4">
                   <Accordion type="single" collapsible className="flex w-full flex-col gap-4">
-                    {menu?.map((item) => renderMobileMenuItem(item))}
+                    {menu.map((item) => renderMobileMenuItem(item))}
                   </Accordion>
                   <ThemeToggle />
                 </div>
